@@ -1,5 +1,9 @@
 package com.medicas.atenciones.repository;
 
-public class MedicoRepository {
-    
+import com.medicas.atenciones.model.Medico;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+
+public interface  MedicoRepository extends JpaRepository<Medico,Long>{
 }
