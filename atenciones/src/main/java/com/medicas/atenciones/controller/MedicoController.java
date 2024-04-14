@@ -12,11 +12,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.medicas.atenciones.model.Medico;
+import com.medicas.atenciones.model.Atencion;
+
 import com.medicas.atenciones.service.MedicoService;
+import com.medicas.atenciones.service.AtencionService;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,6 +31,9 @@ public class MedicoController {
     @Autowired
     private MedicoService medicoService;
 
+    @Autowired
+    private AtencionService atencionService;
+
     @GetMapping
     public List<Medico> getPacientes(){
         return medicoService.getMedicos();
@@ -35,8 +42,38 @@ public class MedicoController {
     public Medico getMedicoById(@PathVariable Long id) {
         return medicoService.getMedicoById(id);
     }
+    @GetMapping("/{id}/atenciones")
+    public ResponseEntity<?> getAtencionesByPaciente(@PathVariable Long id) {
+
+        List<Atencion> atenciones = atencionService.getAtenciones();
+
+        List<Atencion> medicas = new ArrayList<>();
+
+        for(Atencion atencion : atenciones){
+            if(atencion.getIdMedico().equals(id)){
+                medicas.add(atencion);
+            }
+        }
+
+        return ResponseEntity.ok().body(medicas);
+    }
+    @GetMapping("/{id}/atenciones/pendientes")
+    public ResponseEntity<?> getAtencionesPendientes(@PathVariable Long id) {
+
+        List<Atencion> atenciones = atencionService.getAtenciones();
+
+        List<Atencion> pendientes = new ArrayList<>();
+
+        for(Atencion atencion : atenciones){
+            if(atencion.getEstado().equals("P") && atencion.getIdMedico().equals(id)){
+                pendientes.add(atencion);
+            }
+        }
+
+        return ResponseEntity.ok().body(pendientes);
+    }
     
-     @PostMapping("/add")
+    @PostMapping("/add")
     public ResponseEntity<?> createMedico(@RequestBody Medico medico) {
         //Lista de errores en validaciones
         List<String> errores = medico.validarCampos();
