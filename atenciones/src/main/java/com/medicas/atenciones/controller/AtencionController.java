@@ -135,6 +135,9 @@ public class AtencionController {
             ResponseEntity.badRequest().body(errores);
         } 
 
+        atencion.setIdMedico(medico.getId());
+        atencion.setIdPaciente(paciente.getId());
+
         if( auxFecha.trim().length() == 10){
             return ResponseEntity.ok(atencionService.updateAtencion(id, atencion));
         }
