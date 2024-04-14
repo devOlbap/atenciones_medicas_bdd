@@ -12,8 +12,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.medicas.atenciones.model.Paciente;
-import com.medicas.atenciones.service.PacienteService;
+import com.medicas.atenciones.model.Atencion;
 
+import com.medicas.atenciones.service.PacienteService;
+import com.medicas.atenciones.service.AtencionService;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,6 +31,9 @@ public class PacienteController {
     @Autowired
     private PacienteService pacienteService;
 
+    @Autowired
+    private AtencionService atencionService;
+
     @GetMapping
     public List<Paciente> getPacientes(){
         return pacienteService.getPacientes();
@@ -35,8 +42,54 @@ public class PacienteController {
     public Paciente getPacienteById(@PathVariable Long id) {
         return pacienteService.getPacienteById(id);
     }
-    
-     @PostMapping("/add")
+    @GetMapping("/{id}/atenciones")
+    public ResponseEntity<?> getAtencionesByPaciente(@PathVariable Long id) {
+
+        List<Atencion> atenciones = atencionService.getAtenciones();
+
+        List<Atencion> medicas = new ArrayList<>();
+
+        for(Atencion atencion : atenciones){
+            if(atencion.getIdPaciente().equals(id)){
+                medicas.add(atencion);
+            }
+        }
+
+        return ResponseEntity.ok().body(medicas);
+    }
+    @GetMapping("/{id}/atenciones/pendientes")
+    public ResponseEntity<?> getAtencionesPendientes(@PathVariable Long id) {
+
+        List<Atencion> atenciones = atencionService.getAtenciones();
+
+        List<Atencion> pendientes = new ArrayList<>();
+
+        for(Atencion atencion : atenciones){
+            if(atencion.getEstado().equals("P") && atencion.getIdPaciente().equals(id)){
+                pendientes.add(atencion);
+            }
+        }
+
+        return ResponseEntity.ok().body(pendientes);
+    }
+    @GetMapping("/{id}/atenciones/historial")
+    public ResponseEntity<?> getAtencionesHistorico(@PathVariable Long id) {
+
+        List<Atencion> atenciones = atencionService.getAtenciones();
+
+        List<Atencion> historico = new ArrayList<>();
+
+        for(Atencion atencion : atenciones){
+            if(atencion.getEstado().equals("H") || atencion.getEstado().equals("C")){
+                if(atencion.getIdPaciente().equals(id)){
+                    historico.add(atencion);
+                }
+            }
+        }
+
+        return ResponseEntity.ok().body(historico);
+    }
+    @PostMapping("/add")
     public ResponseEntity<?> createPaciente(@RequestBody Paciente paciente) {
         
         //Lista de errores en validaciones
