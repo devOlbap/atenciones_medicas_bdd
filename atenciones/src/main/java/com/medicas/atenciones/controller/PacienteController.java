@@ -28,7 +28,7 @@ public class PacienteController {
     private PacienteService pacienteService;
 
     @GetMapping
-    public List<Paciente> getUsers(){
+    public List<Paciente> getPacientes(){
         return pacienteService.getPacientes();
     }
     @GetMapping("/{id}")
