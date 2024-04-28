@@ -12,7 +12,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 
 import com.medicas.atenciones.model.Paciente;
-import com.medicas.atenciones.repository.PacienteRepository;
 
 
 @DataJpaTest
@@ -23,14 +22,12 @@ public class PacienteRepositoryTest {
 
 
     @Test
-    public void guardarPeliculaTest(){
-        Paciente n_paciente = new Paciente();
-        n_paciente.setNombre("Gabriel");
+    public void obtenerPacienteByRutTest(){
 
-        Paciente res_paciente = pacienteRepository.save(n_paciente);
+        Paciente pacientebyrut = pacienteRepository.findByRut(12345678);
 
-        assertNotNull(res_paciente.getId());
-        assertEquals("Gabriel", res_paciente.getNombre());
+        assertNotNull(pacientebyrut.getId());
+        assertEquals(pacientebyrut.getRut(), 12345678);
 
     }
 
