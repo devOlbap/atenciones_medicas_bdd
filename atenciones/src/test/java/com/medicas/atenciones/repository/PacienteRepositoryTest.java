@@ -20,7 +20,6 @@ public class PacienteRepositoryTest {
     @Autowired
     private PacienteRepository pacienteRepository;
 
-
     @Test
     public void obtenerPacienteByRutTest(){
 
