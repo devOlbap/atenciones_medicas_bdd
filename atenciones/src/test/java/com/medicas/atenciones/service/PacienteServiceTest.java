@@ -14,7 +14,7 @@ import com.medicas.atenciones.model.Paciente;
 import com.medicas.atenciones.repository.PacienteRepository;
 
 @ExtendWith(MockitoExtension.class)
-public class PeliculaServiceTest {
+public class PacienteServiceTest {
 
     @InjectMocks
     private PacienteServiceImpl pacienteServiceImpl;
