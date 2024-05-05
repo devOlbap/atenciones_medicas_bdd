@@ -1,0 +1,4 @@
+com\medicas\atenciones\repository\PacienteRepositoryTest.class
+com\medicas\atenciones\service\AtencionServiceTest.class
+com\medicas\atenciones\service\PacienteServiceTest.class
+com\medicas\atenciones\AtencionesApplicationTests.class
