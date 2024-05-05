@@ -1,0 +1,17 @@
+com\medicas\atenciones\controller\AtencionController.class
+com\medicas\atenciones\repository\AtencionRepository.class
+com\medicas\atenciones\service\PacienteService.class
+com\medicas\atenciones\service\AtencionService.class
+com\medicas\atenciones\service\MedicoServiceImpl.class
+com\medicas\atenciones\service\AtencionServiceImpl.class
+com\medicas\atenciones\model\Atencion.class
+com\medicas\atenciones\AtencionesApplication.class
+com\medicas\atenciones\service\MedicoService.class
+com\medicas\atenciones\controller\MedicoController.class
+com\medicas\atenciones\repository\MedicoRepository.class
+com\medicas\atenciones\model\AtencionResponse.class
+com\medicas\atenciones\model\Medico.class
+com\medicas\atenciones\controller\PacienteController.class
+com\medicas\atenciones\service\PacienteServiceImpl.class
+com\medicas\atenciones\model\Paciente.class
+com\medicas\atenciones\repository\PacienteRepository.class
